@@ -57,11 +57,11 @@ include('functions/common_function.php');
                     </ul>
                 </div>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                <li class="nav-item">
+                <a class="nav-link text-white" href="#"><i class="fa-solid fa-cart-shopping"></i><sup><?php cart_item(); ?></sup></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Total Price:100/-</a>
+                <a class="nav-link text-white " href="#">Total Price:<?php total_cart_price(); ?>/-</a>
               </li>
           
             </ul>
@@ -220,7 +220,7 @@ include('functions/common_function.php');
           
          
       </div>
-      <div class='col-md-12'>
+      <div class='col-md-12 mt-3'>
       <div class='container w-50 m-auto'>
       <h2 Class='mb-4'> $product_title Full Specifications</h2>
       
@@ -235,7 +235,7 @@ include('functions/common_function.php');
             <td>Colors</td>
             <td>$product_color</td></tr>
 
-            <tr>
+          <tr>
         <td class='font-weight-bold'>Connectivity</td>
         <td> </td></tr>
 
@@ -383,7 +383,7 @@ include('functions/common_function.php');
   <div class="col-md-2  p-0 ">
     
     </div>
-        <div class="col-md-10 row">
+        <div class="col-md-8 row">
               <!-- Fetching Products -->
               <?php
               // calling function
