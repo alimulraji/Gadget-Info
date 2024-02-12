@@ -1,59 +1,224 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 .logo {
-    width: 20%;
-    height: 7%;
-    margin-top: 15px;
-  }
+  width: 20%;
+  height: 7%;
+  margin-top: 15px;
+}
 
 .logo1 {
-    width: 6%;
-    height: 7%;
+  width: 6%;
+  height: 7%;
 }
-
-
-
 
 .card-img-top {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
 }
 
-
-.row{
-    width: 1300px;
-    margin: auto;
-    overflow: hidden;
-    text-align: center;
+.img {
+  vertical-align: middle;
+  border-style: none;
+  height: 110px;
 }
 
-.admin-image{
-    width: 100px;
-    object-fit: contain;
+.row {
+  width: 1300px;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+
+  /* margin: auto;
+  overflow: hidden; */
 }
 
-
-.footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.row2 {
+  width: auto;
+  overflow: hidden;
+  margin-top: 70px;
+  text-align: left;
 }
-.insert{
-    display: flex;
+
+.row3 {
+  width: auto;
+  overflow: hidden;
+  margin-left: 60px;
+  text-align: left;
+  margin-top: -70px;
+}
+
+.admin-image {
+  width: 100px;
+  object-fit: contain;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.insert {
+  display: flex;
   align-items: center;
 }
 
-.auto{
-    width: 700px;
+.auto {
+  width: 700px;
+}
+
+.table-product td {
+  border-top: 0px solid #dee2e6 !important;
+  color: #000000 !important;
+}
+
+.spc {
+  margin-left: 200px;
+}
+
+.card-img {
+  width: 450px;
+  height: 560px;
+  object-fit: contain;
+}
+
+body {
+  /* background-color: #ffffff;
+    margin-top:20px; */
+}
+.card {
+  margin-bottom: 30px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: 0;
+}
+.card .card-subtitle {
+  font-weight: 300;
+  margin-bottom: 10px;
+  color: #8898aa;
+}
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f3f8fa !important;
+}
+
+.card-body2 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  margin-top: -50px;
+}
+
+/* Product Details PRoduct Image */
+
+img {
+  width: 30px;
+  height: 60px;
+  display: block;
+}
+.main-wrapper {
+  /* min-height: 100vh; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+.product-div {
+  margin: 1rem 0;
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  border-radius: 3px;
+  column-gap: 10px;
+}
+.product-div-left {
+  padding: 20px;
+}
+.product-div-right {
+  padding: 20px;
+}
+.img-container img {
+  width: 350px;
+  height: 460px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.hover-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+}
+.hover-container div {
+  border: 2px solid rgba(252, 160, 175, 0.7);
+  padding: 1rem;
+  border-radius: 3px;
+  margin: 0 4px 8px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -40px;
+}
+.active {
+  border-color: rgb(255, 145, 163) !important;
+}
+.hover-container div:hover {
+  border-color: rgb(255, 145, 163);
+}
+.hover-container div img {
+  width: 50px;
+  cursor: pointer;
+}
+.product-div-right span {
+  display: block;
 }
 
 
 
+/* <div class='white-box text-center '><img src='./admin_area/product_images/$product_image1' class='img-responsive card-img'></div> */
 
+/* PRoduct details */
+
+/* 
+<div class='carousel-inner'>
+        <div class='carousel-item active'>
+          <img src='./admin_area/product_images/$product_image1' alt='Los Angeles' class='d-block card-img'>
+        </div>
+        <div class='carousel-item'>
+          <img src='./admin_area/product_images/$product_image2' alt='Chicago' class='d-block card-img'>
+        </div>
+        <div class='carousel-item'>
+          <img src='./admin_area/product_images/$product_image3' alt='New York' class='d-block card-img'>
+        </div>
+      </div>
+      
+     
+      <button class='carousel-control-prev' type='button' data-bs-target='#demo' data-bs-slide='prev'>
+        <span class='carousel-control-prev-icon'></span>
+      </button>
+      <button class='carousel-control-next style = 'color:blue;'' type='button' data-bs-target='#demo' data-bs-slide='next'>
+        <span class='carousel-control-next-icon' style = 'color:blue;'></span>
+      </button> */
+
+
+
+      

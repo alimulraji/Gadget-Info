@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2024 at 01:26 PM
+-- Generation Time: Feb 12, 2024 at 02:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -55,16 +55,6 @@ CREATE TABLE `cart_details` (
   `quantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`product_id`, `ip_address`, `quantity`) VALUES
-(18, '127.0.0.1', 0),
-(21, '127.0.0.1', 0),
-(22, '127.0.0.1', 0),
-(24, '127.0.0.1', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -85,7 +75,47 @@ INSERT INTO `categories` (`category_id`, `category_title`) VALUES
 (2, 'Mobile'),
 (3, 'Laptop'),
 (4, 'Keyboard'),
-(26, 'oneplus');
+(5, 'oneplus');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_pending`
+--
+
+CREATE TABLE `orders_pending` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `invoice_number` int(255) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(255) NOT NULL,
+  `order_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders_pending`
+--
+
+INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_id`, `quantity`, `order_status`) VALUES
+(5, 8, 349604393, 23, 0, 'pending'),
+(6, 8, 81336053, 21, 5, 'pending'),
+(7, 8, 1373976254, 19, 2, 'pending'),
+(8, 8, 707071343, 23, 0, 'pending'),
+(9, 8, 2097315262, 24, 0, 'pending'),
+(10, 1, 351990598, 21, 0, 'pending'),
+(11, 1, 868355239, 24, 0, 'pending'),
+(12, 1, 41076965, 23, 0, 'pending'),
+(13, 1, 1377606905, 19, 0, 'pending'),
+(14, 1, 1346472693, 22, 0, 'pending'),
+(15, 1, 1212621713, 23, 0, 'pending'),
+(16, 1, 195473285, 23, 0, 'pending'),
+(17, 1, 300860435, 22, 0, 'pending'),
+(18, 1, 870873506, 24, 0, 'pending'),
+(19, 1, 78545453, 22, 0, 'pending'),
+(20, 1, 1487684993, 20, 0, 'pending'),
+(21, 1, 443103154, 21, 0, 'pending'),
+(22, 1, 816374413, 18, 0, 'pending'),
+(23, 1, 1672238672, 23, 1, 'pending');
 
 -- --------------------------------------------------------
 
@@ -153,6 +183,31 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_description`, `p
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_orders`
+--
+
+CREATE TABLE `user_orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount_due` int(255) NOT NULL,
+  `invoice_number` int(255) NOT NULL,
+  `total_products` int(255) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `order_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_orders`
+--
+
+INSERT INTO `user_orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES
+(30, 1, 101900, 334168897, 1, '2024-02-12 13:53:38', 'pending'),
+(31, 1, 101900, 2089354890, 1, '2024-02-12 13:54:00', 'pending'),
+(32, 1, 52500, 1672238672, 1, '2024-02-12 13:55:32', 'pending');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_table`
 --
 
@@ -166,6 +221,13 @@ CREATE TABLE `user_table` (
   `user_address` varchar(255) NOT NULL,
   `user_mobile` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_table`
+--
+
+INSERT INTO `user_table` (`user_id`, `username`, `user_email`, `user_password`, `user_images`, `user_ip`, `user_address`, `user_mobile`) VALUES
+(1, 'shuvo', 'shuvo@gmail.com', '$2y$10$Ztq444ZGlMvfdLPIaqGGdO7fLnWRZbUdlKZZ01Prm4Ff9SuPLrp0m', 'download.png', '::1', 'dhaka', '01303199653');
 
 --
 -- Indexes for dumped tables
@@ -190,10 +252,22 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `orders_pending`
+--
+ALTER TABLE `orders_pending`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `user_orders`
+--
+ALTER TABLE `user_orders`
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `user_table`
@@ -215,7 +289,13 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `orders_pending`
+--
+ALTER TABLE `orders_pending`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -224,10 +304,16 @@ ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `user_orders`
+--
+ALTER TABLE `user_orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

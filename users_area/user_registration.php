@@ -1,3 +1,10 @@
+
+<?php 
+include('../includes/connect.php'); 
+include('../functions/common_function.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +25,30 @@
 
 <body class="bg-light  ">
     
+<div class="container-fluid p-0">
+    <!-- First child -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+      <img src="../images/Logo0.png" alt="" class="logo1" style="width:112px;height:113px;">
+      <a class="mt-3" href="../index.php"><img src="../images/Logo.png" alt="Logo" style="width:293px;height:62px;"></a>
 
-            <div class="container mt-2">
+
+      <div class="collapse navbar-collapse mt-2" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active ml-2 ">
+            <a class=" btn btn-outline-light " href="../index.php">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ml-2">
+            <a class="btn btn-outline-light " href="../display_all.php">Products</a>
+          </li>
+          
+
+          
+        
+
+        <div>
+    </nav>
+    </div>
+            <div class="container mt-5">
         <h1 class="text-center ">New User Registration</h1>
      <!-- Form -->
         <form action="" method="post" enctype="multipart/form-data">
@@ -93,3 +122,51 @@
 
 </body>
 </html>
+
+<!-- PHP Code -->
+<?php 
+if(isset($_POST['user_register'])){
+    $user_username = $_POST['user_username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
+    $confirm_user_password = $_POST['confirm_user_password'];
+    $user_address = $_POST['user_address'];
+    $user_contact = $_POST['user_contact'];
+    $user_image = $_FILES['user_image']['name'];
+    $user_image_tmp = $_FILES['user_image']['tmp_name'];
+    $user_ip = getIPAddress();
+
+    // select_query
+    $select_query = "SELECT * FROM `user_table` WHERE username='$user_username' or user_email='$user_email'";
+    $result = mysqli_query($con, $select_query);
+    $rows_count = mysqli_num_rows($result);
+
+    if($rows_count > 0){
+        echo "<script>alert('UserName and Email Already Exist')</script>";
+    } else if($user_password != $confirm_user_password){
+        echo "<script>alert('Password Do Not Match')</script>";
+    } else {
+        move_uploaded_file($user_image_tmp, "./user_images/$user_image");
+        $insert_query = "INSERT INTO `user_table` (username, user_email, user_password, user_images, user_ip, user_address, user_mobile) VALUES ('$user_username', '$user_email', '$hash_password', '$user_image', '$user_ip', '$user_address', '$user_contact')";
+        $sql_execute = mysqli_query($con, $insert_query);
+
+        // selection cart items
+        $select_cart_items = "SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
+        $result_cart = mysqli_query($con, $select_cart_items);
+        $rows_count = mysqli_num_rows($result_cart);
+
+        if($rows_count > 0){
+            $_SESSION['username'] = $user_username;
+            echo "<script>alert('You have items in your Cart')</script>";
+            echo "<script>window.open('checkout.php','_self')</script>";
+        } else {
+            echo "<script>alert('Registration Successful')</script>";
+            echo "<script>window.open('user_login.php','_self')</script>";
+        }
+    }
+}
+?>
+
+
+
