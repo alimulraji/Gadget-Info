@@ -1,3 +1,13 @@
+<!-- connect File -->
+<?php
+include('../includes/connect.php');
+include('../functions/common_function.php');
+session_start();
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +23,10 @@
     
     <!-- CSS File -->
     <link rel="stylesheet" href="../style.css">
+   <style>
+    
+
+   </style> 
 </head>
 <body>
     <!-- navbar -->
@@ -28,7 +42,18 @@
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Welcome Guest</a>
+                            <a href="" class="text-white"><?php
+if(!isset($_SESSION['username'])){
+  echo " 
+  <a class='text-white' href='#'>Welcome Guest</a>
+";
+}else{
+  echo " 
+  <a class='nav-link text-white' href='#'> Welcome ".$_SESSION['username']."</a>
+  ";
+}
+
+?></a>
                         </li>
                     </ul>
                 </nav>
@@ -42,27 +67,64 @@
 
         <!-- Third Child -->
         <div class="row">
-            <div class="col-md 12 bg-secondary p-1 d-flex align-items-center">
-                <div class="p-3">
-                    <a href="#"><img src="../images/user.png" alt="" class="admin-image"></a>
-                    <p class="text-light text-center">Admin Name</p>
+            <div class="col-md 12 bg-info p-1 d-flex align-items-center rounded">
+                <div class="p-3 ml-3">
+                    <!-- <a href="#"><img src="../images/user.png" alt="" class="rounded" style="height:100px"></a> -->
+                    <?php 
+                    $username=$_SESSION['username'];
+                    $user_image=" Select * from `admin_table` where username='$username'";
+                    $result_image=mysqli_query($con,$user_image);
+                    $row_image=mysqli_fetch_array($result_image);
+                    $user_image=$row_image['user_images'];
+                    echo "
+                    <a href='#'><img src='./product_images/$user_image' alt='' class='rounded'  style='height:110px'></a>
+                    ";        
+                    ?>
+
+                    <h class=" ">
+                        <?php
+                        if(!isset($_SESSION['username'])){
+                        echo " 
+                        <p class='text-light text-center' href='#'>Admin Name</p>
+                        ";
+                        }else{
+                        echo " 
+                        <p class='text-light text-center' href='#'> ".$_SESSION['username']."</p>
+                        ";
+                        }
+                        ?>
+                    </h>
                 </div>
 
-                <div class="button text-center">
-                    <button class="my-3"><a href="insert_product.php" class="nav-link text-light bg-info my-1">Insert Products</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View Products</a></button>
-                    <button><a href="index.php?insert_category" class="nav-link text-light bg-info my-1">Insert Categories</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View Categories</a></button>
-                    <button><a href="index.php?insert_brand" class="nav-link text-light bg-info my-1">Insert Brands</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View Brands</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">All Order</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">All Payments</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">List Users</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Logout</a></button>
-                    
-                </div>
+                <div class="button adbutton text-center ">
+            <a class="btn btn-outline-light mx-1 my-2" href="insert_product.php">Insert Products</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?view_products">View Products</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?insert_category">Insert Categories</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?view_categories">View Categories</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?insert_brand">Insert Brands</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?view_brands">View Brands</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?list_orders">All Order</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?list_payments">All Payments</a>
+            <a class="btn btn-outline-light mx-1 my-2" href="index.php?list_users">List Users</a>
+            
+            <?php if(!isset($_SESSION['username'])){
+  echo "
+  <a class=' btn-outline-light' href='admin_login.php'> Logout</a>
+   ";
+}else{
+  echo " 
+  <a class='btn btn-danger' href='admin_logout.php'> Logout</a>
+   ";
+}
+?>
+
+
+
+          </div>
             </div>
         </div>
+
+
 
 
         <!-- Fourth Child -->
@@ -74,12 +136,66 @@
             if(isset($_GET['insert_brand'])){
                 include('insert_brands.php');   
             }
+            if(isset($_GET['view_products'])){
+                include('view_products.php');   
+            }
+            if(isset($_GET['edit_products'])){
+                include('edit_products.php');   
+            }
+            if(isset($_GET['edit_images'])){
+                include('edit_images.php');   
+            }
+            if(isset($_GET['delete_product'])){
+                include('delete_product.php');   
+            }
+            if(isset($_GET['view_categories'])){
+                include('view_categories.php');   
+            }
+            if(isset($_GET['view_brands'])){
+                include('view_brands.php');   
+            }
+            if(isset($_GET['edit_category'])){
+                include('edit_category.php');   
+            }
+            if(isset($_GET['edit_brands'])){
+                include('edit_brands.php');   
+            }
+            if(isset($_GET['delete_category'])){
+                include('delete_category.php');   
+            }
+            if(isset($_GET['delete_brands'])){
+                include('delete_brands.php');   
+            }
+            if(isset($_GET['list_orders'])){
+                include('list_orders.php');   
+            }
+            if(isset($_GET['list_payments'])){
+                include('list_payments.php');   
+            }
+            if(isset($_GET['list_users'])){
+                include('list_users.php');   
+            }
+            if(isset($_GET['delete_order'])){
+                include('delete_order.php');   
+            }
+            if(isset($_GET['delete_payment'])){
+                include('delete_payment.php');   
+            }
+            if(isset($_GET['delete_user'])){
+                include('delete_user.php');   
+            }
+            
+            
+
+
+
+
             ?>
         </div>
 
 
         <!-- Last Child Footer-->
-        <div class="fixed-bottom">
+        <div class="fixed-bottom ">
     <div class="bg-info p-3 text-center text-white">
         <h6>All Rights Reserved @Design By <b>Gadget Info</b>-2023</h6>
     </div>

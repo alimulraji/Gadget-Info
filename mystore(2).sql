@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2024 at 06:06 PM
+-- Generation Time: May 06, 2024 at 06:12 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -28,11 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin_table` (
-  `admin_id` int(11) NOT NULL,
-  `admin_name` varchar(255) NOT NULL,
-  `admin_email` varchar(255) NOT NULL,
-  `admin_password` varchar(255) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
+  `user_images` varchar(255) NOT NULL,
+  `user_ip` varchar(100) NOT NULL,
+  `user_address` varchar(255) NOT NULL,
+  `user_mobile` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_table`
+--
+
+INSERT INTO `admin_table` (`user_id`, `username`, `user_email`, `user_password`, `user_images`, `user_ip`, `user_address`, `user_mobile`) VALUES
+(3, 'shuvo11', 'shuvo11@gmail.com', '$2y$10$IG4zjYhY.OwurvEScblnluADZ3wOmsosbhrLsscnMJwVcFC/gBhDW', 'download.png', '127.0.0.1', '', ''),
+(4, 'riya', 'riya@gmail.com', '$2y$10$g.ZtFZYSRo0nAy0MvaRO4uzTgoFQpLcrTBW46bGqO8JQjOzbVSRY.', 'bkb1.jpg', '127.0.0.1', '', '');
 
 -- --------------------------------------------------------
 
@@ -67,13 +79,6 @@ CREATE TABLE `cart_details` (
   `ip_address` varchar(255) NOT NULL,
   `quantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`product_id`, `ip_address`, `quantity`) VALUES
-(18, '::1', 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +135,8 @@ INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_
 (35, 1, 893241196, 20, 1, 'pending'),
 (36, 1, 85068253, 20, 1, 'pending'),
 (37, 5, 283657263, 21, 1, 'pending'),
-(38, 5, 1408847598, 19, 1, 'pending');
+(38, 5, 1408847598, 19, 1, 'pending'),
+(39, 1, 990434698, 18, 1, 'pending');
 
 -- --------------------------------------------------------
 
@@ -216,10 +222,6 @@ CREATE TABLE `user_orders` (
 --
 
 INSERT INTO `user_orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES
-(30, 1, 101900, 334168897, 1, '2024-02-12 13:53:38', 'pending'),
-(31, 1, 101900, 2089354890, 1, '2024-02-13 09:46:02', 'Complete'),
-(32, 1, 52500, 1672238672, 1, '2024-02-13 07:07:15', 'Complete'),
-(33, 1, 101900, 2856829, 1, '2024-02-13 07:12:59', 'Complete'),
 (34, 1, 472450, 1479302347, 1, '2024-02-13 09:36:38', 'Complete'),
 (35, 1, 129999, 416449278, 1, '2024-02-13 09:33:05', 'Complete'),
 (36, 1, 52500, 503218177, 1, '2024-02-13 09:27:31', 'pending'),
@@ -233,7 +235,8 @@ INSERT INTO `user_orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`
 (44, 1, 254490, 893241196, 2, '2024-03-28 14:47:49', 'pending'),
 (45, 1, 160000, 85068253, 1, '2024-03-29 00:09:48', 'pending'),
 (46, 5, 97990, 283657263, 1, '2024-04-30 11:32:28', 'pending'),
-(47, 5, 94490, 1408847598, 1, '2024-04-30 11:34:00', 'pending');
+(47, 5, 94490, 1408847598, 1, '2024-04-30 11:34:00', 'pending'),
+(48, 1, 18990, 990434698, 1, '2024-05-01 11:33:03', 'pending');
 
 -- --------------------------------------------------------
 
@@ -255,10 +258,6 @@ CREATE TABLE `user_payments` (
 --
 
 INSERT INTO `user_payments` (`payment_id`, `order_id`, `invoice_number`, `amount`, `payment_mode`, `date`) VALUES
-(10, 32, 1672238672, 52500, 'Nagod', '2024-02-13 07:07:15'),
-(11, 33, 2856829, 101900, 'Internet Banking', '2024-02-13 07:12:59'),
-(12, 35, 416449278, 129999, 'Bank Payment', '2024-02-13 09:33:05'),
-(13, 34, 1479302347, 472450, 'Bank Payment', '2024-02-13 09:36:38'),
 (14, 31, 2089354890, 101900, 'Nagod', '2024-02-13 09:46:02'),
 (15, 38, 1178890132, 94490, 'Nagod', '2024-02-13 09:46:08'),
 (16, 42, 1031092864, 97990, 'Cash on Delivery', '2024-03-28 14:48:18');
@@ -298,7 +297,7 @@ INSERT INTO `user_table` (`user_id`, `username`, `user_email`, `user_password`, 
 -- Indexes for table `admin_table`
 --
 ALTER TABLE `admin_table`
-  ADD PRIMARY KEY (`admin_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `brands`
@@ -356,7 +355,7 @@ ALTER TABLE `user_table`
 -- AUTO_INCREMENT for table `admin_table`
 --
 ALTER TABLE `admin_table`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -374,7 +373,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders_pending`
 --
 ALTER TABLE `orders_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -386,7 +385,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `user_orders`
 --
 ALTER TABLE `user_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `user_payments`
@@ -398,7 +397,7 @@ ALTER TABLE `user_payments`
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

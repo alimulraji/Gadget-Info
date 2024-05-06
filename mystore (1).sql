@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2024 at 06:06 PM
+-- Generation Time: Apr 04, 2024 at 08:38 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,19 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `mystore`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_table`
---
-
-CREATE TABLE `admin_table` (
-  `admin_id` int(11) NOT NULL,
-  `admin_name` varchar(255) NOT NULL,
-  `admin_email` varchar(255) NOT NULL,
-  `admin_password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +41,8 @@ INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
 (2, 'Xiaomi'),
 (3, 'Realme'),
 (4, 'Oppo'),
-(5, 'Vivo');
+(5, 'Vivo'),
+(7, 'vivo1');
 
 -- --------------------------------------------------------
 
@@ -73,7 +61,8 @@ CREATE TABLE `cart_details` (
 --
 
 INSERT INTO `cart_details` (`product_id`, `ip_address`, `quantity`) VALUES
-(18, '::1', 0);
+(18, '::1', 0),
+(21, '127.0.0.1', 0);
 
 -- --------------------------------------------------------
 
@@ -95,7 +84,8 @@ INSERT INTO `categories` (`category_id`, `category_title`) VALUES
 (2, 'Mobile'),
 (3, 'Laptop'),
 (4, 'Keyboard'),
-(5, 'oneplus');
+(5, 'oneplus'),
+(29, 'retg');
 
 -- --------------------------------------------------------
 
@@ -128,9 +118,7 @@ INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_
 (33, 5, 1031092864, 21, 1, 'pending'),
 (34, 5, 1411392917, 24, 1, 'pending'),
 (35, 1, 893241196, 20, 1, 'pending'),
-(36, 1, 85068253, 20, 1, 'pending'),
-(37, 5, 283657263, 21, 1, 'pending'),
-(38, 5, 1408847598, 19, 1, 'pending');
+(36, 1, 85068253, 20, 1, 'pending');
 
 -- --------------------------------------------------------
 
@@ -231,9 +219,7 @@ INSERT INTO `user_orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`
 (42, 5, 97990, 1031092864, 1, '2024-03-28 14:48:18', 'Complete'),
 (43, 5, 101900, 1411392917, 1, '2024-03-28 14:47:23', 'pending'),
 (44, 1, 254490, 893241196, 2, '2024-03-28 14:47:49', 'pending'),
-(45, 1, 160000, 85068253, 1, '2024-03-29 00:09:48', 'pending'),
-(46, 5, 97990, 283657263, 1, '2024-04-30 11:32:28', 'pending'),
-(47, 5, 94490, 1408847598, 1, '2024-04-30 11:34:00', 'pending');
+(45, 1, 160000, 85068253, 1, '2024-03-29 00:09:48', 'pending');
 
 -- --------------------------------------------------------
 
@@ -295,12 +281,6 @@ INSERT INTO `user_table` (`user_id`, `username`, `user_email`, `user_password`, 
 --
 
 --
--- Indexes for table `admin_table`
---
-ALTER TABLE `admin_table`
-  ADD PRIMARY KEY (`admin_id`);
-
---
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
@@ -353,12 +333,6 @@ ALTER TABLE `user_table`
 --
 
 --
--- AUTO_INCREMENT for table `admin_table`
---
-ALTER TABLE `admin_table`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -374,7 +348,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders_pending`
 --
 ALTER TABLE `orders_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -386,7 +360,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `user_orders`
 --
 ALTER TABLE `user_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `user_payments`

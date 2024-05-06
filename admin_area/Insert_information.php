@@ -82,6 +82,27 @@ include('../includes/connect.php');
 
 
 <body class="bg-light ">
+
+
+
+<div class="container-fluid p-0">
+        <!-- First Chhild -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <div class="container-fluid">
+            <div class="d-flex ">  
+            <img src="../images/Logo0.png" alt="" style="width:80px;height:80px;" class="mr-2">
+            
+            <a class="mt-3" href="index.php"><img src="../images/Logo.png" alt="HTML tutorial" style="width:293px;height:62px;"></a>
+</div>
+                <nav class="navbar navbar-expand-lg">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">Welcome Guest</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
    
     <div class="container mt-2">
         <h1 class="text-center ">Insert Products</h1>

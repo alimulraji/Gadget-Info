@@ -1,7 +1,7 @@
 <?php
     // including connect file
 
-    include('./includes/connect.php');
+    // include('./includes/connect.php');
 
 
     // gateing products
@@ -27,8 +27,8 @@
         
           echo " <div class=''  >
           <div class='col-md-3  mb-4'>
-                  <div class='card' style='width: 18rem; height: 425px;'>
-                    <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+                  <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+                    <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
                     <div class='card-body'>
                       <h5 class='card-title'>$product_title</h5>
                       <p class='card-text mb-2'>$product_description</p>
@@ -69,9 +69,9 @@ while($row=mysqli_fetch_assoc($result_query)){
   $brand_id=$row['brand_id'];
 
   echo " <div class=''  >
-  <div class='col-md-3  mb-4'>
-          <div class='card' style='width: 18rem; height: 425px;'>
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+  <div class='col-md-3  mb-3 '>
+          <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+            <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text mb-2'>$product_description</p>
@@ -117,8 +117,8 @@ while($row=mysqli_fetch_assoc($result_query)){
 
   echo " <div class=''  >
   <div class='col-md-3  mb-4'>
-          <div class='card' style='width: 18rem;  height: 425px;'>
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+          <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+            <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text mb-2'>$product_description</p>
@@ -165,8 +165,8 @@ while($row=mysqli_fetch_assoc($result_query)){
 
   echo " <div class=''  >
   <div class='col-md-3  mb-4'>
-          <div class='card' style='width: 18rem;  height: 425px;'>
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+          <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+            <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text mb-2'>$product_description</p>
@@ -193,7 +193,7 @@ $select_brands="select * from brands";
         while($row_data=mysqli_fetch_assoc($result_brands)){
           $brand_title=$row_data['brand_title'];
           $brand_id=$row_data['brand_id'];
-          echo "<li class='nav-item'>
+          echo "<li class='nav-item mb-3'>
           <a href='index.php?brand=$brand_id' class='nav-link text-light'>$brand_title</a> 
           </li>";
         }
@@ -208,7 +208,7 @@ function getcategories(){
     while($row_data=mysqli_fetch_assoc($result_categories)){
       $category_title=$row_data['category_title'];
       $category_id=$row_data['category_id'];
-      echo "<li class='nav-item'>
+      echo "<li class='nav-item mb-3'>
       <a href='index.php?category=$category_id' class='nav-link text-light'>$category_title</a> 
       </li>";
     }
@@ -239,8 +239,8 @@ function search_product(){
         
           echo " <div class=''  >
           <div class='col-md-3  mb-4'>
-                  <div class='card' style='width: 18rem; height: 425px;'>
-                    <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+                  <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+                    <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
                     <div class='card-body'>
                       <h5 class='card-title'>$product_title</h5>
                       <p class='card-text mb-2'>$product_description</p>
@@ -311,8 +311,8 @@ $brand_id=$row['brand_id'];
 
 echo " <div class=''  >
 <div class='col-md-3  mb-4'>
-        <div class='card' style='width: 18rem; height: 425px;'>
-          <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
+        <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+          <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
           <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text mb-2'>$product_description</p>
@@ -352,25 +352,45 @@ function getIPAddress() {
 
 
 // cart function
-function cart(){
-  if(isset($_GET['add_to_cart'])){
-      global $con;
-      $get_ip_add = getIPAddress();
-      $get_product_id = $_GET['add_to_cart'];
-      $select_query = "select * from `cart_details` where ip_address='$get_ip_add' and product_id=$get_product_id";
-      $result_query = mysqli_query($con, $select_query);
-      $num_of_rows = mysqli_num_rows($result_query); 
 
-      if($num_of_rows > 0){
-          echo "<script>alert('This Item is Already present inside the cart')</script>";
-          echo "<script>window.open('index.php','_self')</script>";
-      } else {
-          $insert_query = "insert into `cart_details` (product_id, ip_address, quantity) values ($get_product_id,'$get_ip_add',0)";
-          $result_query = mysqli_query($con, $insert_query);
-          echo "<script>alert('This Item is added to cart')</script>";
-          echo "<script>window.open('index.php','_self')</script>";
-      }
-  }
+function cart(){
+    if(isset($_GET['add_to_cart'])){
+        global $con;
+        $get_ip_add = mysqli_real_escape_string($con, getIPAddress());
+        $get_product_id = intval($_GET['add_to_cart']);
+        
+        // Validate product ID
+        if($get_product_id <= 0){
+            echo "<script>alert('Invalid Product ID')</script>";
+            return;
+        }
+        
+        $select_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_add' AND product_id=$get_product_id";
+        $result_query = mysqli_query($con, $select_query);
+        
+        if(!$result_query){
+            echo "<script>alert('Error in checking cart: " . mysqli_error($con) . "')</script>";
+            return;
+        }
+
+        $num_of_rows = mysqli_num_rows($result_query); 
+
+        if($num_of_rows > 0){
+            echo "<script>alert('This Item is Already present inside the cart')</script>";
+            echo "<script>window.open('index.php','_self')</script>";
+        } else {
+            $insert_query = "INSERT INTO `cart_details` (product_id, ip_address, quantity) VALUES ($get_product_id, '$get_ip_add', 0)";
+            $result_query = mysqli_query($con, $insert_query);
+            
+            if(!$result_query){
+                echo "<script>alert('Error in adding item to cart: " . mysqli_error($con) . "')</script>";
+                return;
+            }
+            
+            echo "<script>alert('This Item is added to cart')</script>";
+            echo "<script>window.open('index.php','_self')</script>";
+        }
+    }
 }
 
 // Function to get cart item number
@@ -417,4 +437,134 @@ function total_cart_price(){
 
   echo $total_price;
 }
+
+
+
+
+
+
+// function search_product_price(){
+//     global $con;
+//         if(isset($_GET['search_data_product'])){
+//             $search_data_value=$_GET['search_data'];
+//         $search_query="select * from `products` where product_pricee like '%$search_data_value%'";
+//         $result_query=mysqli_query($con,$search_query);
+
+//         $num_of_rows=mysqli_num_rows($result_query);
+//         if ($num_of_rows == 0) {
+//             echo "<h3 class='col-md-12 text-center text-danger'>No results match No Products found on this categoey!</h3>";
+//         }
+
+//         while($row=mysqli_fetch_assoc($result_query)){
+//           $product_id=$row['product_id'];
+//           $product_title=$row['product_title'];
+//           $product_description=$row['product_description'];
+//           $product_image1=$row['product_image1'];
+//           $product_price=$row['product_price'];
+//           $category_id=$row['category_id'];
+//           $brand_id=$row['brand_id'];
+        
+//           echo " <div class=''  >
+//           <div class='col-md-3  mb-4'>
+//                   <div class='card border border-info shadow  bg-white rounded' style='width: 18rem; height: 440px;'>
+//                     <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
+//                     <div class='card-body'>
+//                       <h5 class='card-title'>$product_title</h5>
+//                       <p class='card-text mb-2'>$product_description</p>
+//                       <p class='card-text mb-2'>Price: $product_price /- </p>
+//                       <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
+//                       <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
+
+//                     </div>
+//                   </div>
+//                 </div>
+//                 </div> ";
+
+// }
+// }
+// }
+
+// search price range
+
+function search_product_price(){
+  global $con;
+
+  if(isset($_GET['search_product_price'])){
+      // Set default values for $min_price and $max_price
+      $min_price = 1;
+      $max_price = 100000;
+
+      // Check if the price range is specified
+      if(isset($_GET['search_price_range'])){
+          $price_range = explode('-', $_GET['search_price_range']);
+          $min_price = $price_range[0];
+          $max_price = $price_range[1];
+      }
+
+      $search_query = "SELECT * FROM `products` WHERE product_price BETWEEN $min_price AND $max_price ";
+      $result_query = mysqli_query($con, $search_query);
+
+      $num_of_rows = mysqli_num_rows($result_query);
+      if ($num_of_rows == 0) {
+          echo "<h3 class='col-md-12 text-center text-danger'>No results match. No Products found in this category!</h3>";
+      }
+
+      while($row = mysqli_fetch_assoc($result_query)){
+          // Extract product information
+          $product_id = $row['product_id'];
+          $product_title = $row['product_title'];
+          $product_description = $row['product_description'];
+          $product_image1 = $row['product_image1'];
+          $product_price = $row['product_price'];
+          $category_id = $row['category_id'];
+          $brand_id = $row['brand_id'];
+
+          // Display product card
+          echo "<div class='col-md-3 mb-4'>
+                  <div class='card border border-info shadow bg-white rounded' style='width: 18rem; height: 440px;'>
+                      <img src='./admin_area/product_images/$product_image1' class='card-img-top mt-2' alt='...'>
+                      <div class='card-body'>
+                          <h5 class='card-title'>$product_title</h5>
+                          <p class='card-text mb-2'>$product_description</p>
+                          <p class='card-text mb-2'>Price: $product_price /-</p>
+                          <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
+                          <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
+                      </div>
+                  </div>
+              </div>";
+      }
+  }
+}
+
+
+
+// get user order details
+function get_user_order_details(){
+  global $con;
+  $username = $_SESSION['username'];
+  $get_details = "SELECT * FROM `user_table` WHERE username='$username'";
+  $result_query = mysqli_query($con, $get_details);
+  while ($row_query = mysqli_fetch_array($result_query)) {
+    $user_id = $row_query['user_id'];
+    if (!isset($_GET['edit_account']) && !isset($_GET['my_orders']) && !isset($_GET['delete_account'])) {
+      $get_orders = "SELECT * FROM `user_orders` WHERE user_id=$user_id AND order_status='pending'";
+      $result_orders_query = mysqli_query($con, $get_orders);
+      $row_count = mysqli_num_rows($result_orders_query);
+      if ($row_count > 0) {
+        echo "<h3 class='text-center text-success mt-5 mb-2'>You Have <span class='text-danger'>$row_count</span> pending orders</h3>
+        <a href='profile.php'>Order Details</a>";
+      }else{
+        echo "<h3 class='text-center text-success mt-5 mb-2'>You Have <b class='text-danger'>Zero </b> Pending Orders</h3>
+        <a href='../index.php' class='text-bg-primary'><h5>Explore Products</h5> </a>";
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
 ?>
