@@ -128,11 +128,19 @@ if(!isset($_SESSION['username'])){
 
 if(!isset($_SESSION['username'])){
   echo " <li class='nav-item ml-2'>
+<<<<<<< HEAD
   <a class='btn btn-outline-light' href='../users_area/user_login.php'> Login</a>
   </li> ";
 }else{
   echo " <li class='nav-item ml-2'>
   <a class='btn btn-outline-light' href='../users_area/logout.php'> Logout</a>
+=======
+  <a class='btn btn-outline-light' href='./users_area/user_login.php'> Login</a>
+  </li> ";
+}else{
+  echo " <li class='nav-item ml-2'>
+  <a class='btn btn-outline-light' href='./users_area/logout.php'> Logout</a>
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd
   </li> ";
 }
 ?>
@@ -205,9 +213,12 @@ if(isset($_GET['edit_account'])){
 if(isset($_GET['my_orders'])){
   include('user_orders.php');
 }
+<<<<<<< HEAD
 if(isset($_GET['delete_account'])){
   include('delete_account.php');
 }
+=======
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd
 ?>
 
     </div>

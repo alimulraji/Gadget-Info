@@ -2,6 +2,7 @@
 <?php
 include('../includes/connect.php');
 session_start();
+<<<<<<< HEAD
 
 if(isset($_GET['order_id'])){
     $order_id = $_GET['order_id'];
@@ -110,3 +111,6 @@ if(isset($_POST['confirm_payment'])){
     </div>
 </body>
 </html>
+=======
+?>
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd

@@ -56,6 +56,7 @@
                 <td>$total_products</td>
                 <td>$invoice_number</td>
                 <td>$order_date</td>
+<<<<<<< HEAD
                 <td>$order_status</td>";
             ?>
 
@@ -67,6 +68,11 @@
                     </tr>";
                 }
                 
+=======
+                <td>$order_status</td>
+                <td><a href='confirm_payment.php' >Confirm</a></td>
+            </tr>";
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd
             $number++;
             }
             ?>

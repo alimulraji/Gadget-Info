@@ -195,7 +195,11 @@ if(!isset($_SESSION['username'])){
 
 
         <!-- Last Child Footer-->
+<<<<<<< HEAD
         <div class="fixed-bottom ">
+=======
+        <div class="fixed-bottom">
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd
     <div class="bg-info p-3 text-center text-white">
         <h6>All Rights Reserved @Design By <b>Gadget Info</b>-2023</h6>
     </div>

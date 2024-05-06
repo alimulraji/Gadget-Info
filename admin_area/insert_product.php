@@ -20,6 +20,10 @@ if (isset($_POST['insert_product'])) {
     $product_price = $_POST['product_price'];
     $first_release = $_POST['first_release'];
     $product_color = $_POST['product_color'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba04eb97993bd7b489a69b29570ffe2110b369dd
     $network = $_POST['network'];
     $sim = $_POST['sim'];
     $usb_type = $_POST['usb_type'];
