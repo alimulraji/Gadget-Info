@@ -58,11 +58,11 @@ include('functions/common_function.php');
                     </ul>
                 </div>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                <li class="nav-item">
+                <a class="nav-link text-white" href="#"><i class="fa-solid fa-cart-shopping"></i><sup><?php cart_item(); ?></sup></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Total Price:100/-</a>
+                <a class="nav-link text-white " href="#">Total Price:<?php total_cart_price(); ?>/-</a>
               </li>
           
             </ul>

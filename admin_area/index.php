@@ -79,9 +79,11 @@
 
 
         <!-- Last Child Footer-->
-        <?php   
-        include("../includes/footer.php");
-        ?>
+        <div class="fixed-bottom">
+    <div class="bg-info p-3 text-center text-white">
+        <h6>All Rights Reserved @Design By <b>Gadget Info</b>-2023</h6>
+    </div>
+<div>
 
     </div>
 
