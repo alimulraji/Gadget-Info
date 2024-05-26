@@ -1,6 +1,11 @@
 <?php
 session_start();
-session_unset();
-session_destroy();
-echo "<script>window.open('admin_login.php','_self')</script>";
+
+// Unset only the admin session variable
+if (isset($_SESSION['admin_username'])) {
+    unset($_SESSION['admin_username']);
+    echo "<script>window.open('admin_login.php','_self')</script>";
+} else {
+    echo "<script>window.open('admin_login.php','_self')</script>";
+}
 ?>

@@ -1,6 +1,11 @@
 <?php
 session_start();
-session_unset();
-session_destroy();
-echo "<script>window.open('../index.php','_self')</script>";
+
+// Unset only the user session variable
+if (isset($_SESSION['username'])) {
+    unset($_SESSION['username']);
+    echo "<script>window.open('user_login.php','_self')</script>";
+} else {
+    echo "<script>window.open('user_login.php','_self')</script>";
+}
 ?>

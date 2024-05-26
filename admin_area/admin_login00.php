@@ -1,3 +1,10 @@
+<?php
+include('../includes/connect.php');
+include('../functions/common_function.php');
+@session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,7 +104,7 @@
         
             <div class="text-center"></div>
             <div class=" form_outline  mb-4 m-auto ">
-                <input type="submit" name="user_register" class="btn btn-info   px-3 mt-4  " value="Login">
+                <input type="submit" name="admin_login" class="btn btn-info   px-3 mt-4  " value="Login">
                 <p class="mt-2">Don't have an account? <a href="admin_registration.php" class="text-danger"> Register </a></p>
             </div>
             </form>
@@ -120,8 +127,37 @@
 
 
 
+   <?php
+if (isset($_POST['admin_login'])) {
+  $user_username = $_POST['user_username'];
+  $user_password = $_POST['user_password'];
+
+  $select_query = "SELECT * FROM `admin_table` WHERE username='$user_username'";
+  $result = mysqli_query($con, $select_query);
+  $row_count = mysqli_num_rows($result);
+  $row_data = mysqli_fetch_assoc($result);
+  $user_ip = getIPAddress();
+
+  if ($row_count > 0) {
+    $_SESSION['username'] = $user_username;
+    if (password_verify($user_password, $row_data['user_password'])) {
+      $_SESSION['username'] = $user_username;
+      // echo "<script>alert('Login Successful')</script>";
+      if ($row_count == 1 and $row_count_cart == 0) {
+        $_SESSION['username'] = $user_username;
+        echo "<script>alert('Login Successful')</script>";
+        echo "<script>window.open('index.php','_self')</script>";
+      }
+    } else {
+      echo "<script>alert('Invalid Credentials')</script>";
+    }
+  } else {
+    echo "<script>alert('Invalid Credentials')</script>";
+  }
+}
 
 
+?>
 
    
 

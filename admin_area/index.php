@@ -43,13 +43,13 @@ session_start();
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="" class="text-white"><?php
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['admin_username'])){
   echo " 
   <a class='text-white' href='#'>Welcome Guest</a>
 ";
 }else{
   echo " 
-  <a class='nav-link text-white' href='#'> Welcome ".$_SESSION['username']."</a>
+  <a class='nav-link text-white' href='#'> Welcome ".$_SESSION['admin_username']."</a>
   ";
 }
 
@@ -71,29 +71,30 @@ if(!isset($_SESSION['username'])){
                 <div class="p-3 ml-3">
                     <!-- <a href="#"><img src="../images/user.png" alt="" class="rounded" style="height:100px"></a> -->
                     <?php 
-                    $username=$_SESSION['username'];
-                    $user_image=" Select * from `admin_table` where username='$username'";
-                    $result_image=mysqli_query($con,$user_image);
-                    $row_image=mysqli_fetch_array($result_image);
-                    $user_image=$row_image['user_images'];
-                    echo "
-                    <a href='#'><img src='./product_images/$user_image' alt='' class='rounded'  style='height:110px'></a>
-                    ";        
-                    ?>
+                        $admin_username = $_SESSION['admin_username'];
+                        $user_image_query = "SELECT * FROM `admin_table` WHERE admin_username='$admin_username'";
+                        $result_image = mysqli_query($con, $user_image_query);
+                        $row_image = mysqli_fetch_array($result_image);
+                        $user_image = $row_image['user_images'];
 
-                    <h class=" ">
-                        <?php
-                        if(!isset($_SESSION['username'])){
-                        echo " 
-                        <p class='text-light text-center' href='#'>Admin Name</p>
-                        ";
-                        }else{
-                        echo " 
-                        <p class='text-light text-center' href='#'> ".$_SESSION['username']."</p>
-                        ";
-                        }
+                        echo "
+                        <a href='#'><img src='./product_images/$user_image' alt='' class='rounded'  style='height:110px'></a>
+                        ";        
                         ?>
-                    </h>
+
+                        <h class=" ">
+                            <?php
+                            if (!isset($_SESSION['admin_username'])) {
+                                echo " 
+                                <p class='text-light text-center' href='#'>Admin Name</p>
+                                ";
+                            } else {
+                                echo " 
+                                <p class='text-light text-center' href='#'> " . $_SESSION['admin_username'] . "</p>
+                                ";
+                            }
+                            ?>
+                        </h>
                 </div>
 
                 <div class="button adbutton text-center ">
@@ -107,7 +108,7 @@ if(!isset($_SESSION['username'])){
             <a class="btn btn-outline-light mx-1 my-2" href="index.php?list_payments">All Payments</a>
             <a class="btn btn-outline-light mx-1 my-2" href="index.php?list_users">List Users</a>
             
-            <?php if(!isset($_SESSION['username'])){
+            <?php if(!isset($_SESSION['admin_username'])){
   echo "
   <a class=' btn-outline-light' href='admin_login.php'> Logout</a>
    ";

@@ -1,3 +1,9 @@
+<?php 
+include('../includes/connect.php'); 
+include('../functions/common_function.php');
+session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,35 +83,35 @@
 
             <!-- Username field -->
             <div class=" form_outline mt-4   ">
-                    <label for="admin_name" class="form-lebel mt-2">Username</label>
-                    <input  type="text"  name="admin_name" id="admin_name" class="form-control" placeholder="Enter your Username" autocomplete="off" required="required">
+                    <label for="user_username" class="form-lebel mt-2">Username</label>
+                    <input  type="text"  name="user_username" id="user_username" class="form-control" placeholder="Enter your Username" autocomplete="off" required="required">
                 </div>
                 <!-- Email field -->
                 <div class=" form_outline mb-4  m-auto ">
-                    <label for="admin_email" class="form-lebel mt-2">Email</label>
-                    <input  type="text"  name="admin_email" id="admin_email" class="form-control" placeholder="Enter your Email" autocomplete="off" required="required">
+                    <label for="user_email" class="form-lebel mt-2">Email</label>
+                    <input  type="text"  name="user_email" id="user_email" class="form-control" placeholder="Enter your Email" autocomplete="off" required="required">
                 </div>
                 
                 <!-- Password field -->
                 <div class=" form_outline m-auto ">
-                    <label for="admin_image" class="form-lebel mt-2"> Admin User Image</label>
-                    <input  type="file"  name="admin_image" id="admin_image" class="form-control" required="required">
+                <label for="user_image" class="form-lebel mt-2">User Image</label>
+                <input  type="file"  name="user_image" id="user_image" class="form-control" required="required">
                 </div>
 
                 <div class=" form_outline m-auto ">
-                    <label for="admin_password " class="form-lebel mt-2">Password</label>
-                    <input  type="password"  name="admin_password" id="admin_password" class="form-control" placeholder="Enter your Password" autocomplete="off" required="required">
+                    <label for="user_password " class="form-lebel mt-2">Password</label>
+                    <input  type="password"  name="user_password" id="user_password" class="form-control" placeholder="Enter your Password" autocomplete="off" required="required">
                 </div>
                 <!-- Confirm Password field -->
                 <div class=" form_outline m-auto ">
-                    <label for="confirm_admin_password " class="form-lebel mt-2">Confirm Password</label>
-                    <input  type="password"  name="confirm_admin_password" id="confirm_admin_password" class="form-control" placeholder="Confirm Password" autocomplete="off" required="required">
+                    <label for="confirm_user_password " class="form-lebel mt-2">Confirm Password</label>
+                    <input  type="password"  name="confirm_user_password" id="confirm_user_password" class="form-control" placeholder="Confirm Password" autocomplete="off" required="required">
                 </div>
                 <!-- Address field -->
             
                 <div class="text-center"></div>
                 <div class=" form_outline  mb-4 m-auto ">
-                    <input type="submit" name="user_register" class="btn btn-info   px-3 mt-4  " value="Register">
+                    <input type="submit" name="admin_register" class="btn btn-info   px-3 mt-4  " value="Register">
                     <p class="mt-2">Already have an account? <a href="admin_login.php" class="text-danger"> Login </a></p>
                 </div>
                 </form>
@@ -123,31 +129,70 @@
 
 <!-- PHP Code -->
 <?php 
-if(isset($_POST['user_register'])){    
-    $admin_name = $_POST['admin_name'];
-    $admin_email = $_POST['admin_email'];
-    $admin_password = $_POST['admin_password'];
-    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
-    $confirm_admin_password = $_POST['confirm_admin_password'];
+// if(isset($_POST['user_register'])){    
+//     $admin_name = $_POST['admin_name'];
+//     $admin_email = $_POST['admin_email'];
+//     $admin_password = $_POST['admin_password'];
+//     $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
+//     $confirm_admin_password = $_POST['confirm_admin_password'];
     
-    $admin_image = $_FILES['admin_image']['name'];
-    $admin_image_tmp = $_FILES['admin_image']['tmp_name'];
+//     $admin_image = $_FILES['admin_image']['name'];
+//     $admin_image_tmp = $_FILES['admin_image']['tmp_name'];
+
+//     // select_query
+//     $select_query = "SELECT * FROM `admin_table` WHERE admin_name='$admin_name' or admin_email='$admin_email'";
+//     $result = mysqli_query($con, $select_query);
+//     $rows_count = mysqli_num_rows($result);
+
+//     if($rows_count > 0){
+//         echo "<script>alert('UserName and Email Already Exist')</script>";
+//     } else if($admin_password != $confirm_admin_password){
+//         echo "<script>alert('Password Do Not Match')</script>";
+//     } else {
+//         move_uploaded_file($admin_image_tmp, "./user_images/$admin_image");
+//         $insert_query = "INSERT INTO `admin_table` (admin_name, user_email, user_password, user_images) VALUES ('$admin_name', '$admin_email', '$hash_password', '$admin_image', )";
+//         $sql_execute = mysqli_query($con, $insert_query);
+
+        
+//     }
+// }
+?>
+
+
+<?php 
+if(isset($_POST['admin_register'])){
+    $user_username = $_POST['user_username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
+    $confirm_user_password = $_POST['confirm_user_password'];
+    $user_image = $_FILES['user_image']['name'];
+    $user_image_tmp = $_FILES['user_image']['tmp_name'];
+    $user_ip = getIPAddress();
 
     // select_query
-    $select_query = "SELECT * FROM `admin_table` WHERE admin_name='$admin_name' or admin_email='$admin_email'";
+    $select_query = "SELECT * FROM `admin_table` WHERE username='$user_username' or user_email='$user_email'";
     $result = mysqli_query($con, $select_query);
     $rows_count = mysqli_num_rows($result);
 
     if($rows_count > 0){
         echo "<script>alert('UserName and Email Already Exist')</script>";
-    } else if($admin_password != $confirm_admin_password){
+    } else if($user_password != $confirm_user_password){
         echo "<script>alert('Password Do Not Match')</script>";
     } else {
-        move_uploaded_file($admin_image_tmp, "./user_images/$admin_image");
-        $insert_query = "INSERT INTO `admin_table` (admin_name, user_email, user_password, user_images) VALUES ('$admin_name', '$admin_email', '$hash_password', '$admin_image', )";
+        move_uploaded_file($user_image_tmp, "./product_images/$user_image");
+        $insert_query = "INSERT INTO `admin_table` (username, user_email, user_password, user_images, user_ip) VALUES ('$user_username', '$user_email', '$hash_password', '$user_image', '$user_ip')";
         $sql_execute = mysqli_query($con, $insert_query);
 
+        if($rows_count > 0){
+            $_SESSION['username'] = $user_username;
+            echo "<script>alert('You have items in your Cart')</script>";
+            echo "<script>window.open('admin_login.php','_self')</script>";
+        } 
+            echo "<script>alert('Registration Successful')</script>";
+            echo "<script>window.open('admin_login.php','_self')</script>";
+        }  
         
     }
-}
+
 ?>

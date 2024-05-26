@@ -22,15 +22,30 @@ include('../functions/common_function.php');
   <!-- CSS File -->
   <link rel="stylesheet" href="style.css">
 
+  <title>Admin Login</title>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+        img {
+            height: 550px;
+        }
+        .ml-5, .mx-5 {
+    margin-left: 9rem !important;
+}
+.row2 {
+    width: auto;
+    margin: auto;
+    overflow: hidden;
+    text-align: center;
+}
+    </style>
 </head>
 
-<style>
-  body {
-    overflow-x: hidden;
-  }
-</style>
 
-<body class="bg-light  ">
+
+<body class="  ">
 
   <!-- nav Bar -->
   <div class="container-fluid p-0">
@@ -52,30 +67,38 @@ include('../functions/common_function.php');
     </nav>
   </div>
 
-  <div class="container mt-5">
+  <div class="container mt-3">
     <h1 class="text-center ">Admin User Login</h1>
     <!-- Form -->
+
+    <div class=" d-flex ">
+     <div class="col-lg-6 col-xl-6 mt-5 mr-5">
+                <img src="../images/Admin_reg.jpg" alt="Admin Registration">
+            </div>
+            <div class="col-lg-6 col-xl-6">
+
     <form action="" method="post">
 
       <!-- Username field -->
-      <div class=" form_outline mb-4 w-50 m-auto ">
+      <div class=" form_outline mb-4 mt-5  ">
         <label for="user_username" class="form-lebel mt-2">Username</label>
         <input type="text" name="user_username" id="user_username" class="form-control" placeholder="Enter your Username" autocomplete="off" required="required">
       </div>
 
       <!-- Password field -->
-      <div class=" form_outline w-50 m-auto ">
+      <div class=" form_outline mb-4 mt-5   ">
         <label for="user_password " class="form-lebel mt-2">User Password</label>
         <input type="password" name="user_password" id="user_password" class="form-control" placeholder="Enter your Password" autocomplete="off" required="required">
       </div>
 
       <!-- Price -->
-      <div class=" form_outline  w-50 m-auto ">
+      <div class=" form_outline mb-4 mt-5  ">
         <input type="submit" name="admin_login" class="btn btn-info   px-3 mt-3" value="Login">
         <p class="mt-2 pt-1">Don't have have an account? <a href="admin_registration.php" class="text-danger"> Register </a></p>
       </div>
 
     </form>
+</div>
 
   </div>
 
@@ -89,30 +112,31 @@ include('../functions/common_function.php');
 </html>
 
 <?php
+
 if (isset($_POST['admin_login'])) {
-  $user_username = $_POST['user_username'];
+  $admin_username = $_POST['user_username'];
   $user_password = $_POST['user_password'];
 
-  $select_query = "SELECT * FROM `admin_table` WHERE username='$user_username'";
+  // Query to select user based on username
+  $select_query = "SELECT * FROM `admin_table` WHERE admin_username='$admin_username'";
   $result = mysqli_query($con, $select_query);
   $row_count = mysqli_num_rows($result);
-  $row_data = mysqli_fetch_assoc($result);
-  $user_ip = getIPAddress();
 
   if ($row_count > 0) {
-    $_SESSION['username'] = $user_username;
-    if (password_verify($user_password, $row_data['user_password'])) {
-      $_SESSION['username'] = $user_username;
-      // echo "<script>alert('Login Successful')</script>";
-      if ($row_count == 1 and $row_count_cart == 0) {
-        $_SESSION['username'] = $user_username;
-        echo "<script>alert('Login Successful')</script>";
-        echo "<script>window.open('index.php','_self')</script>";
+      $row_data = mysqli_fetch_assoc($result);
+
+      // Verify the password
+      if (password_verify($user_password, $row_data['user_password'])) {
+          $_SESSION['admin_username'] = $admin_username;
+          echo "<script>alert('Login Successful')</script>";
+          echo "<script>window.open('index.php', '_self')</script>";
+      } else {
+          echo "<script>alert('Invalid Credentials')</script>";
       }
-    } else {
-      echo "<script>alert('Invalid Credentials')</script>";
-    }
   } else {
-    echo "<script>alert('Invalid Credentials')</script>";
+      echo "<script>alert('Invalid Credentials')</script>";
   }
 }
+
+
+?>
